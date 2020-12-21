@@ -1,0 +1,32 @@
+<div class="container-sm mt-5" style="max-width: 35rem;" *ngIf="assignment">
+  <div class="row align-items-sm-center mb-4">
+    <h1 class="mb-4">{{assignment.title}}</h1>
+    <a class='btn btn-outline-success ml-auto' routerLink="/assignments">Go Back</a>
+
+  </div>
+  <div *ngIf="assignmentForm">
+    <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit(assignmentForm)">
+      <div class="row align-items-sm-center mb-4" *ngFor="let question of assignment.questions">
+        <div class="col justify-content-sm-center">
+          <fieldset>
+            <div class="card" >
+              <div class="card-header">
+                {{question.question}}
+              </div>
+              <div class="card-body">
+                <div class="form-group list-group-flush" *ngFor="let choice of question.choices; let i=index">
+                  <label class=" list-group-item list-group-item-action">
+                    <input [formControlName]="question._id" type="radio" class="form-check-input" value={{choice}}>{{choice}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </fieldset>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+</div>

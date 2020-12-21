@@ -1,0 +1,22 @@
+<div class="container-sm mt-5" style="max-width: 35rem;">
+  <div class="d-flex justify-content-between">
+    <h1 class="mb-4">Assignments</h1>
+    <h6 *ngIf="overallGrade">Grade: {{overallGrade}}%</h6>
+  </div>
+  <div class="row align-items-sm-center mb-4" *ngFor="let assignment of assignments">
+    <div class="col justify-content-sm-center">
+      <div class="card">
+        <div class="card-header">
+          <h3>{{assignment.title}}</h3>
+        </div>
+        <div class="card-body">
+          <span>Due {{assignment.date | date:'fullDate'}}</span>
+          <button *ngIf="!assignment.grade; else noGrade" type="button" class="btn btn-success ml-5" (click)="takeAssessment(assignment._id)">Take Assessment</button>
+          <ng-template #noGrade>
+            <span class="badge badge-pill badge-info ml-5">Score: {{assignment.grade}}%</span>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
