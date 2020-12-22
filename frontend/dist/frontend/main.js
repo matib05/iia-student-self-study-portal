@@ -1320,13 +1320,13 @@ class AssignmentService {
         this.authService = authService;
     }
     getAllAssignment() {
-        return this.http.get(`/assignments`, { observe: 'response' });
+        return this.http.get(`/api/assignments`, { observe: 'response' });
     }
     getAssignmentDetails(id) {
-        return this.http.get(`/assignments/${id}`, { observe: 'response' });
+        return this.http.get(`/api/assignments/${id}`, { observe: 'response' });
     }
     submitAssignment(userAnswers, assignmentId) {
-        return this.http.post(`/assignments/${assignmentId}`, { userAnswers }, { observe: 'response' });
+        return this.http.post(`/api/assignments/${assignmentId}`, { userAnswers }, { observe: 'response' });
     }
 }
 AssignmentService.ɵfac = function AssignmentService_Factory(t) { return new (t || AssignmentService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"])); };
@@ -1410,10 +1410,10 @@ class AuthenticationService {
         return !this.jwtHelper.isTokenExpired(token);
     }
     login(email, password) {
-        return this.http.post(`/user/login`, { email, password }, { observe: 'response' });
+        return this.http.post(`/api/user/login`, { email, password }, { observe: 'response' });
     }
     signUp(email, fullName, password, securityQuestion, securityAnswer) {
-        return this.http.post(`/user/register`, { email: email,
+        return this.http.post(`/api/user/register`, { email: email,
             name: fullName,
             password: password,
             securityQuestion: securityQuestion,
@@ -1421,10 +1421,10 @@ class AuthenticationService {
         }, { observe: 'response' });
     }
     checkUser(email, name, securityQuestion, securityAnswer) {
-        return this.http.post(`/user/checkUser`, { email, name, securityQuestion, securityAnswer }, { observe: 'response' });
+        return this.http.post(`/api/user/checkUser`, { email, name, securityQuestion, securityAnswer }, { observe: 'response' });
     }
     changePassword(password) {
-        return this.http.post(`/user/changePassword`, { password }, { observe: "response" });
+        return this.http.post(`/api/user/changePassword`, { password }, { observe: "response" });
     }
     saveUserDetails(userObject) {
         localStorage.setItem('email', userObject.email);
