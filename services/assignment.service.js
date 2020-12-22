@@ -42,7 +42,12 @@ const getOverallGrade = gradedAssignments => {
     gradedAssignments.forEach(assignment => {
         grades.push(assignment.grade);
     })
-    return  grades.reduce((a, b) => a + b) / grades.length;
+    if (grades.length > 0) {
+        return grades.reduce((a, b) => a + b) / grades.length;
+    } else {
+        return null;
+    }
+
 }
 
 

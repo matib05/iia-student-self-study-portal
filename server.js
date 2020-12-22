@@ -16,8 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-let distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
+app.use(express.static( __dirname + '/frontend/dist/frontend'));
 
 app.use('/user', userRouter);
 app.use('/assignments', assignmentRouter);
