@@ -18,6 +18,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { UserConfirmComponent } from './components/forgot-password/user-confirm/user-confirm.component';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UserConfirmComponent } from './components/forgot-password/user-confirm/
     ReactiveFormsModule
   ],
   providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     JwtHelperService

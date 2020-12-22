@@ -146,6 +146,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_signup_signup_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/signup/signup.component */ "./src/app/components/signup/signup.component.ts");
 /* harmony import */ var _components_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/forgot-password/forgot-password.component */ "./src/app/components/forgot-password/forgot-password.component.ts");
 /* harmony import */ var _components_forgot_password_user_confirm_user_confirm_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/forgot-password/user-confirm/user-confirm.component */ "./src/app/components/forgot-password/user-confirm/user-confirm.component.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+
 
 
 
@@ -169,6 +171,7 @@ class AppModule {
 }
 AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]] });
 AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [
+        { provide: _angular_common__WEBPACK_IMPORTED_MODULE_17__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_17__["HashLocationStrategy"] },
         { provide: _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JWT_OPTIONS"], useValue: _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JWT_OPTIONS"] },
         { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HTTP_INTERCEPTORS"], useClass: _interceptors_token_interceptor__WEBPACK_IMPORTED_MODULE_12__["TokenInterceptor"], multi: true },
         _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JwtHelperService"]
@@ -220,6 +223,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"]
                 ],
                 providers: [
+                    { provide: _angular_common__WEBPACK_IMPORTED_MODULE_17__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_17__["HashLocationStrategy"] },
                     { provide: _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JWT_OPTIONS"], useValue: _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JWT_OPTIONS"] },
                     { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HTTP_INTERCEPTORS"], useClass: _interceptors_token_interceptor__WEBPACK_IMPORTED_MODULE_12__["TokenInterceptor"], multi: true },
                     _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JwtHelperService"]
