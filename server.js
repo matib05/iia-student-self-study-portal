@@ -18,8 +18,8 @@ app.use(cookieParser());
 
 app.use(express.static( __dirname + '/frontend/dist/frontend'));
 
-app.use('/user', userRouter);
-app.use('/assignments', assignmentRouter);
+app.use('/api/user', userRouter);
+app.use('/api/assignments', assignmentRouter);
 const port  = process.env.PORT || 5000;
 
 app.listen(port, () => {

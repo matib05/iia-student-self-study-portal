@@ -52,17 +52,17 @@ router.post('/:id', protect, (req, res) => {
     }
 } )
 
-router.post('/',  protect, (req, res) => {
+router.post('/', (req, res) => {
     if (utils.isCreateAssignmentRequestValid(req.body)) {
         const { questions, isActive, title } = req.body;
         assignmentService.createAssignment(questions, isActive, title, new Date()).then(question => {
-            utils.generateToken(req.user._id).then(token => {
+            // utils.generateToken(req.user._id).then(token => {
                 let response = {
                     question,
-                    token
+                    // token
                 }
                 res.status(200).json(response);
-            });
+            // });
         })
     } else {
         res.status(400).json('bad request')

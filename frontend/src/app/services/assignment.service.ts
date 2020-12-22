@@ -12,15 +12,15 @@ export class AssignmentService {
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
   public getAllAssignment(): Observable<HttpResponse<any>> {
-    return this.http.get(`/assignments`, {observe: 'response'});
+    return this.http.get(`/api/assignments`, {observe: 'response'});
   }
 
   public getAssignmentDetails(id: string): Observable<HttpResponse<any>> {
-    return this.http.get(`/assignments/${id}`, {observe: 'response'});
+    return this.http.get(`/api/assignments/${id}`, {observe: 'response'});
   }
 
   public submitAssignment(userAnswers: object, assignmentId: string): Observable<HttpResponse<any>> {
-    return this.http.post(`/assignments/${assignmentId}`, {userAnswers}, {observe: 'response'})
+    return this.http.post(`/api/assignments/${assignmentId}`, {userAnswers}, {observe: 'response'})
   }
 
 }
