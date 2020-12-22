@@ -9,12 +9,10 @@ import {Router} from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
 
-  isRouterLogin: boolean;
-
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
-    this.isRouterLogin = this.router.url === '/login'
+    console.log(this.router.url);
   }
 
   public logout(): void {
