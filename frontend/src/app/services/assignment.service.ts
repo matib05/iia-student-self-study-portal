@@ -8,19 +8,20 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class AssignmentService {
+  url: string = environment.baseUrl
 
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
   public getAllAssignment(): Observable<HttpResponse<any>> {
-    return this.http.get(`/api/assignments`, {observe: 'response'});
+    return this.http.get(`${this.url}/api/assignments`, {observe: 'response'});
   }
 
   public getAssignmentDetails(id: string): Observable<HttpResponse<any>> {
-    return this.http.get(`/api/assignments/${id}`, {observe: 'response'});
+    return this.http.get(`${this.url}/api/assignments/${id}`, {observe: 'response'});
   }
 
   public submitAssignment(userAnswers: object, assignmentId: string): Observable<HttpResponse<any>> {
-    return this.http.post(`/api/assignments/${assignmentId}`, {userAnswers}, {observe: 'response'})
+    return this.http.post(`${this.url}/api/assignments/${assignmentId}`, {userAnswers}, {observe: 'response'})
   }
 
 }

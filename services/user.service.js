@@ -7,13 +7,10 @@ module.exports.getUser = (email, password) => {
     if (!email || !password) {
       reject(new Error(constants.USER_DETAILS_NOT_PROVIDED_ERROR));
     } else {
-      console.log('here2');
       User.findOne({email}).then(user => {
         if (user) {
-          console.log('here3');
           utils.matchPassword(password, user.password).then(isMatch => {
             if (isMatch) {
-              console.log('here4');
               resolve(user)
             } else {
               reject(new Error(constants.INVALID_PASSWORD_ERROR))
