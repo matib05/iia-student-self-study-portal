@@ -7,9 +7,12 @@ const { protect } = require('../middleware/auth.middlware');
 
 router.post('/login', (req, res) => {
   if (req.body.email && req.body.password) {
+    console.log('here');
     const {email, password } = req.body;
     userService.getUser(email, password).then(user => {
+      console.log('here5');
       utils.generateToken(user._id).then(token => {
+        console.log('here6');
         let userResponse = {
           email: user.email,
           name: user.name,
