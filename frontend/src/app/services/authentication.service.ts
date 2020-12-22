@@ -10,8 +10,6 @@ import {environment} from "../../environments/environment";
 })
 export class AuthenticationService {
 
-  url = environment.baseUrl;
-
   constructor(private http: HttpClient, public jwtHelper: JwtHelperService) { }
 
   public isAuthenticated(): boolean {
@@ -20,11 +18,11 @@ export class AuthenticationService {
   }
 
   public login(email, password): Observable<HttpResponse<any>> {
-    return this.http.post<any>(`${this.url}/user/login`, {email, password}, {observe: 'response'})
+    return this.http.post<any>(`/user/login`, {email, password}, {observe: 'response'})
   }
 
   public signUp(email, fullName, password, securityQuestion, securityAnswer): Observable<HttpResponse<any>> {
-    return this.http.post<any>(`${this.url}/user/register`,
+    return this.http.post<any>(`/user/register`,
       {email: email,
         name: fullName,
         password: password,
@@ -34,12 +32,12 @@ export class AuthenticationService {
   }
 
   public checkUser(email, name, securityQuestion, securityAnswer): Observable<HttpResponse<any>> {
-    return this.http.post<any>(`${this.url}/user/checkUser`,
+    return this.http.post<any>(`/user/checkUser`,
       {email, name, securityQuestion, securityAnswer}, {observe: 'response'});
   }
 
   public changePassword(password): Observable<HttpResponse<any>> {
-    return this.http.post<any>(`${this.url}/user/changePassword`, {password}, {observe: "response"});
+    return this.http.post<any>(`/user/changePassword`, {password}, {observe: "response"});
   }
 
   public saveUserDetails(userObject: User): void {
