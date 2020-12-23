@@ -7,6 +7,8 @@ import {AssignmentDetailsComponent} from "./components/assignment-details/assign
 import {SignupComponent} from "./components/signup/signup.component";
 import {ForgotPasswordComponent} from "./components/forgot-password/forgot-password.component";
 import {UserConfirmComponent} from "./components/forgot-password/user-confirm/user-confirm.component";
+import {AdminPanelComponent} from "./components/admin-panel/admin-panel.component";
+import {CreateAssignmentComponent} from "./components/admin-panel/create-assignment/create-assignment.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'assignments', component: AssignmentComponent, canActivate: [AuthGuardService] },
   { path: 'assignment/:id', component: AssignmentDetailsComponent, canActivate: [AuthGuardService] },
+  { path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuardService] },
+  { path: 'createAssignment', component: CreateAssignmentComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({

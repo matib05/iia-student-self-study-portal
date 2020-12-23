@@ -12,6 +12,7 @@ export class AssignmentComponent implements OnInit {
   assignments: any;
   overallGrade: any;
   errorMessage: string;
+  isAdmin: boolean;
   constructor(private assignmentService: AssignmentService, private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -22,6 +23,9 @@ export class AssignmentComponent implements OnInit {
           this.assignments = response.body.assignments;
           if (response.body.overallGrade) {
             this.overallGrade = response.body.overallGrade;
+          }
+          if (response.body.isAdmin) {
+            this.isAdmin= true;
           }
         }
       }
