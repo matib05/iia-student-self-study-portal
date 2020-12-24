@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { AssignmentService } from "../../../services/assignment.service";
 
 @Component({
   selector: 'app-create-assignment',
@@ -9,8 +10,9 @@ import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validat
 export class CreateAssignmentComponent implements OnInit {
 
   CreateAssignmentForm: FormGroup;
+  errorMessage: string;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private assignmentService: AssignmentService) { }
 
   ngOnInit(): void {
     this.CreateAssignmentForm = this.fb.group({
@@ -40,8 +42,17 @@ export class CreateAssignmentComponent implements OnInit {
     (this.CreateAssignmentForm.get('questions') as FormArray).push(this.questions);
   }
 
+  deleteQuestion(questionIndex): void {
+    if (questionIndex === 0) {
+      alert('Must have at least one question for an assignment');
+    } else {
+      if (confirm('Are you sure you want to remove this question?')) {
+        (this.CreateAssignmentForm.get('questions') as FormArray).removeAt(questionIndex);
+      }
+    }
+  }
+
   addChoice(question, index) {
-    console.log(index);
     (question.get('choices') as FormArray).push(this.getChoices(index));
   }
 
@@ -55,7 +66,44 @@ export class CreateAssignmentComponent implements OnInit {
 
 
   onSubmit(assignmentDetails): void {
-    console.log(assignmentDetails);
+    let newAssignment = assignmentDetails.getRawValue()
+    if (this.isFormValid(newAssignment)) {
+      this.errorMessage = '';
+      this.collapseChoices(newAssignment);
+      this.assignmentService.createAssignment(newAssignment).subscribe(response => {
+        console.log(response);
+      })
+    } else {
+      this.errorMessage = 'Form invalid: All fields must have values present.';
+      window.scroll(0,0);
+    }
+  }
+
+  private isFormValid(assignmentForm): boolean {
+    let isQuestionsValid = true, isChoicesValid = true;
+    assignmentForm.questions.forEach(question => {
+      if (!question.question || !question.correctAnswer) {
+        isQuestionsValid = false;
+      }
+      question.choices.forEach((choice, i) => {
+        if (!choice[i]) {
+          isChoicesValid = false;
+        }
+      })
+    })
+    return (isChoicesValid && isQuestionsValid && assignmentForm.title && assignmentForm.dueDate && assignmentForm.isActive);
+  }
+
+  private collapseChoices(assignmentForm): object {
+    assignmentForm.questions.forEach(question => {
+      let choices = [];
+      question.choices.forEach((choice, i) => {
+        choices.push(choice[i]);
+      })
+      choices.push(question.correctAnswer);
+      question.choices = choices;
+    })
+    return assignmentForm;
   }
 
 }

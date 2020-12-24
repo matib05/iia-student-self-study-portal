@@ -24,4 +24,8 @@ export class AssignmentService {
     return this.http.post(`${this.url}/api/assignments/${assignmentId}`, {userAnswers}, {observe: 'response'})
   }
 
+  public createAssignment(assignment: object): Observable<HttpResponse<any>> {
+    return this.http.post(`${this.url}/api/assignments/`, {assignment}, {observe: 'response'});
+  }
+
 }

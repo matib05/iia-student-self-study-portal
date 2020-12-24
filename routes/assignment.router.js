@@ -52,20 +52,26 @@ router.post('/:id', protect, (req, res) => {
     }
 } )
 
-router.post('/', (req, res) => {
-    if (utils.isCreateAssignmentRequestValid(req.body)) {
-        const { questions, isActive, title } = req.body;
-        assignmentService.createAssignment(questions, isActive, title, new Date()).then(question => {
-            // utils.generateToken(req.user._id).then(token => {
-                let response = {
-                    question,
-                    // token
-                }
-                res.status(200).json(response);
-            // });
-        })
+router.post('/', protect, (req, res) => {
+    if (req.user.isAdmin) {
+        if (utils.isCreateAssignmentRequestValid(req.body.assignment)) {
+            const { questions, isActive, title, dueDate } = req.body.assignment;
+            assignmentService.createAssignment(questions, isActive, title, dueDate).then(question => {
+                utils.generateToken(req.user._id).then(token => {
+                    let response = {
+                        question,
+                        token
+                    }
+                    res.status(200).json(response);
+                });
+            })
+        } else {
+            res.status(400).json('bad request')
+        }
     } else {
-        res.status(400).json('bad request')
+        res.status(403).json({
+            errorMessage: 'You do not have permissions to do this action'
+        })
     }
 });
 
