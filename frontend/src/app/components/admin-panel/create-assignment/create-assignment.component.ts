@@ -25,7 +25,7 @@ export class CreateAssignmentComponent implements OnInit {
     return this.fb.group({
       question: ['', Validators.required],
       correctAnswer: ['', Validators.required],
-      choices: this.fb.array([this.getChoices(0), this.getChoices(1)])
+      choices: this.fb.array([this.getChoices(1)])
     })
   }
 
@@ -46,10 +46,22 @@ export class CreateAssignmentComponent implements OnInit {
   }
 
   deleteChoice(question, choiceIndex): void {
-    if (choiceIndex == 1 || choiceIndex == 0) {
-      alert('Must have at least two choices.')
+    if (choiceIndex == 0) {
+      alert('Must have at least two choices (Correct Answer and Choice 1).')
     } else{
-      question.get('choices').removeAt(choiceIndex);
+      if (confirm('Are you sure you want to remove this choice?')) {
+        question.get('choices').removeAt(choiceIndex);
+      }
+    }
+  }
+
+  deleteQuestion(questionIndex): void {
+    if (questionIndex === 0) {
+      alert('Must have at least one question for an assignment');
+    } else {
+      if (confirm('Are you sure you want to remove this question?')) {
+        (this.CreateAssignmentForm.get('questions') as FormArray).removeAt(questionIndex);
+      }
     }
   }
 
