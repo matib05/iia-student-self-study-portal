@@ -10,6 +10,7 @@ import {environment} from "../../environments/environment";
 })
 export class AuthenticationService {
   url: string = environment.baseUrl
+  isAdmin: boolean;
 
   constructor(private http: HttpClient, public jwtHelper: JwtHelperService) { }
 

@@ -9,6 +9,7 @@ import {environment} from "../../environments/environment";
 })
 export class AssignmentService {
   url: string = environment.baseUrl
+  isAssignmentCreated: boolean;
 
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
@@ -22,6 +23,10 @@ export class AssignmentService {
 
   public submitAssignment(userAnswers: object, assignmentId: string): Observable<HttpResponse<any>> {
     return this.http.post(`${this.url}/api/assignments/${assignmentId}`, {userAnswers}, {observe: 'response'})
+  }
+
+  public createAssignment(assignment: object): Observable<HttpResponse<any>> {
+    return this.http.post(`${this.url}/api/assignments/`, {assignment}, {observe: 'response'});
   }
 
 }

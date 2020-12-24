@@ -19,6 +19,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { UserConfirmComponent } from './components/forgot-password/user-confirm/user-confirm.component';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { CreateAssignmentComponent } from './components/admin-panel/create-assignment/create-assignment.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     FooterComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    UserConfirmComponent
+    UserConfirmComponent,
+    AdminPanelComponent,
+    CreateAssignmentComponent
   ],
   imports: [
     BrowserModule,

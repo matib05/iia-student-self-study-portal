@@ -15,6 +15,9 @@ router.post('/login', (req, res) => {
           name: user.name,
           token: token
         }
+        if (user.isAdmin) {
+          userResponse['isAdmin'] = user.isAdmin;
+        }
         res.status(200).send(userResponse);
       }).catch(error => {
         console.error(error.message);

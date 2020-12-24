@@ -54,12 +54,23 @@ const getOverallGrade = gradedAssignments => {
 module.exports.getAssignmentById = id => {
     return new Promise((resolve, reject) => {
         Assignment.findById(id).select('-questions.correctAnswer').then(assignment => {
+            assignment.questions.forEach(question => {
+                question.choices = shuffle(question.choices);
+            })
             resolve(assignment)
         }).catch(error => {
             console.error(error);
             reject(error);
         })
     })
+}
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
 
 module.exports.getAssignment = () => {

@@ -50,7 +50,7 @@ module.exports.isUserAssignmentSubmissionValid = requestBody => {
 }
 
 module.exports.isCreateAssignmentRequestValid = requestBody => {
-    return requestBody.questions && requestBody.questions.length > 0 && requestBody.isActive && requestBody.title;
+    return requestBody.questions && requestBody.questions.length > 0 && requestBody.isActive && requestBody.title && requestBody.dueDate;
 }
 
 module.exports.generateToken = id => {

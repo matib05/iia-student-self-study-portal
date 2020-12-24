@@ -35,4 +35,8 @@ export class AssignmentComponent implements OnInit {
     this.router.navigate([`/assignment/${id}`]);
   }
 
+  get isAdmin(): boolean {
+    return this.authService.isAdmin;
+  }
+
 }

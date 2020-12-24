@@ -15,7 +15,7 @@
               </div>
               <div class="card-body">
                 <div class="form-group list-group-flush" *ngFor="let choice of question.choices; let i=index">
-                  <label class=" list-group-item list-group-item-action">
+                  <label class="list-group-item list-group-item-action">
                     <input [formControlName]="question._id" type="radio" class="form-check-input" value={{choice}}>{{choice}}
                   </label>
                 </div>

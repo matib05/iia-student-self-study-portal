@@ -1,9 +1,8 @@
 <div class="container-sm mt-5" style="max-width: 35rem;">
   <div class="row">
-    <div class="col-md-4">
-      <h1 class="mb-4">Assignments</h1>
-      <h6 class="mb-4" *ngIf="overallGrade">Overall Grade: {{overallGrade | number: '1.2-2' }}%</h6>
-    </div>
+    <h1 class="mb-4">Assignments</h1>
+    <h6 *ngIf="overallGrade" class="m-auto" >Overall Grade: {{overallGrade | number: '1.2-2' }}%</h6>
+<!--    <a *ngIf="isAdmin" class='btn btn-outline-success ml-5' routerLink="/admin">Go Back</a>-->
   </div>
 
   <div class="row align-items-sm-center mb-4" *ngFor="let assignment of assignments">

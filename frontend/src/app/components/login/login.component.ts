@@ -25,7 +25,13 @@ export class LoginComponent implements OnInit {
         if (response.status === 200){
           if(response.body && response.body.token && response.body.email) {
             this.authService.saveUserDetails(response.body)
-            this.router.navigate(['/assignments'])
+            if (response.body.isAdmin) {
+              this.authService.isAdmin = true;
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/assignments'])
+
+            }
           }
         }
       }, error => {

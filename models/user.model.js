@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
     token: {type: String},
     securityQuestion: {type: String, required: true},
     securityAnswer: {type: String, required: true},
+    isAdmin: {type: Boolean, required: false, default: false},
     userSubmissions: {type: mongoose.Schema.Types.ObjectId, ref: 'UserSubmission'},
 
 });
