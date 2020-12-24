@@ -1,4 +1,7 @@
 <div class="container">
+  <div *ngIf="isAssignmentCreated" class="row mt-5 justify-content-center alert alert-success">
+    Assignment Created!
+  </div>
   <div class="row mt-5 justify-content-center">
       <button routerLink="/createAssignment" class="btn btn-info">Create Assignment</button>
   </div>

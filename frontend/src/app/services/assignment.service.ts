@@ -9,6 +9,7 @@ import {environment} from "../../environments/environment";
 })
 export class AssignmentService {
   url: string = environment.baseUrl
+  isAssignmentCreated: boolean;
 
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
 

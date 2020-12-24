@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AssignmentService } from "../../../services/assignment.service";
+import { AuthenticationService } from "../../../services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-assignment',
@@ -12,7 +14,8 @@ export class CreateAssignmentComponent implements OnInit {
   CreateAssignmentForm: FormGroup;
   errorMessage: string;
 
-  constructor(private fb: FormBuilder, private assignmentService: AssignmentService) { }
+  constructor(private fb: FormBuilder, private assignmentService: AssignmentService,
+              private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     this.CreateAssignmentForm = this.fb.group({
@@ -69,9 +72,16 @@ export class CreateAssignmentComponent implements OnInit {
     let newAssignment = assignmentDetails.getRawValue()
     if (this.isFormValid(newAssignment)) {
       this.errorMessage = '';
-      this.collapseChoices(newAssignment);
+      this.collapseChoicesAndShuffle(newAssignment);
       this.assignmentService.createAssignment(newAssignment).subscribe(response => {
-        console.log(response);
+        if (response.body.token) {
+          this.authService.saveToken(response.body.token);
+        }
+        if (response.body.question.isCreated) {
+          this.assignmentService.isAssignmentCreated = true;
+          this.router.navigate(['/admin'])
+        }
+
       })
     } else {
       this.errorMessage = 'Form invalid: All fields must have values present.';
@@ -94,16 +104,25 @@ export class CreateAssignmentComponent implements OnInit {
     return (isChoicesValid && isQuestionsValid && assignmentForm.title && assignmentForm.dueDate && assignmentForm.isActive);
   }
 
-  private collapseChoices(assignmentForm): object {
+  private collapseChoicesAndShuffle(assignmentForm): object {
     assignmentForm.questions.forEach(question => {
       let choices = [];
       question.choices.forEach((choice, i) => {
         choices.push(choice[i]);
       })
       choices.push(question.correctAnswer);
-      question.choices = choices;
+      question.choices = this.shuffle(choices);
+
     })
-    return assignmentForm;
+    return this.shuffle(assignmentForm);
+  }
+
+  private shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
 
 }

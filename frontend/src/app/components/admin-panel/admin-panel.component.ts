@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {AssignmentService} from "../../services/assignment.service";
 
 @Component({
   selector: 'app-admin-panel',
@@ -8,9 +8,13 @@ import {Router} from "@angular/router";
 })
 export class AdminPanelComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private assignmentService: AssignmentService) { }
 
   ngOnInit(): void {
+  }
+
+  get isAssignmentCreated(): boolean {
+    return this.assignmentService.isAssignmentCreated;
   }
 
 
