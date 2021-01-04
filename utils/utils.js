@@ -58,7 +58,7 @@ module.exports.generateToken = id => {
         if (!id) {
             reject(Error(constants.MISSING_PARAMETERS_ERROR('id')))
         }
-        resolve(jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '5m'}));
+        resolve(jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '2h'}));
     });
 }
 
