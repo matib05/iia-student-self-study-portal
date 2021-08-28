@@ -21,6 +21,8 @@ router.get( '/', protect, (req, res) => {
 
 router.get('/:id', protect, (req, res) => {
     let id = req.params.id;
+    let showAnswers = req.query;
+    console.log(req);
     assignmentService.getAssignmentById(id).then(assignment => {
         utils.generateToken(req.user._id).then(token => {
             let response = {
