@@ -13,10 +13,20 @@
         </div>
         <div class="card-body">
           <div class="d-flex justify-content-between">
-            <span>Due {{assignment.date | date:'fullDate'}}</span>
-            <button *ngIf="!assignment.grade; else noGrade" type="button" class="btn btn-success ml-5" (click)="takeAssessment(assignment._id)">Take Assessment</button>
-            <ng-template #noGrade>
+            <ng-container *ngIf="!assignment.grade; then showTakeAssignmentButton; else showGradeAndAnswerButton"></ng-container>
+            <ng-template #showTakeAssignmentButton>
+              <ng-container *ngIf="compareDates(assignment._id); then showDueDate; else pastDue"></ng-container>
+              <ng-template #showDueDate>
+                <span>Due {{assignment.date | date:'mediumDate'}}</span>
+              </ng-template>
+              <ng-template #pastDue>
+                <span class="alert-danger">Past due {{assignment.date | date:'mediumDate'}}</span>
+              </ng-template>
+              <button type="button" class="btn btn-success ml-5" (click)="takeAssessment(assignment._id)">Take Assessment</button>
+            </ng-template>
+            <ng-template #showGradeAndAnswerButton>
               <div class="badge badge-pill badge-info d-flex justify-content-between align-items-center">Score: {{assignment.grade | number: '1.2-2' }}%</div>
+              <button type="button" class="btn btn-light" (click)="showAssessmentAnswers(assignment._id)">View Assignment</button>
             </ng-template>
           </div>
         </div>

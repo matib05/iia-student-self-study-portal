@@ -1,9 +1,8 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AssignmentService} from "../../services/assignment.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../services/authentication.service";
-
 
 @Component({
   selector: 'app-assignment-details',
